@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PrimeCarService — автосервис и магазин запчастей в Астрахани</title>
+<meta name="description" content="PrimeCarService на ул. Медногорской, 121. Полный цикл ремонта легковых, развал-схождение, покраска, диагностика. Магазин моторных масел Bardahl, Liqui Moly, NGN. Все марки авто." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0f14;
+    --bg-2:#141821;
+    --ink:#eef2f7;
+    --ink-dim:#8b95a5;
+    --line:#262c38;
+    --accent:#4ec3ff;
+    --accent-deep:#1a7fb8;
+    --accent-shadow:#0d3a5c;
+    --green:#7fb069;
+    --red:#d24a3a;
+    --grain-opacity:.05;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    overflow-x:hidden;
+    font-feature-settings:"kern" 1,"liga" 1;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;
+    z-index:1;
+    opacity:var(--grain-opacity);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.8'/></svg>");
+    mix-blend-mode:overlay;
+  }
+
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+  @media(max-width:600px){.wrap{padding:0 18px}}
+
+  /* ====== ШАПКА ====== */
+  header.top{
+    position:sticky;top:0;z-index:50;
+    background:rgba(12,15,20,.85);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .top-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 0;gap:20px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:12px;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;font-size:20px;letter-spacing:.04em;
+    text-transform:uppercase;
+  }
+  .logo-mark{
+    width:42px;height:42px;
+    background:var(--accent);
+    color:var(--bg);
+    display:grid;place-items:center;
+    font-family:'Oswald',sans-serif;font-weight:700;
+    font-size:22px;
+    transform:rotate(-4deg);
+    box-shadow:3px 3px 0 var(--accent-shadow);
+    flex-shrink:0;
+  }
+  .logo-text small{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.18em;
+    color:var(--ink-dim);font-weight:500;
+    margin-top:2px;
+  }
+  nav.menu{display:flex;gap:28px;align-items:center}
+  nav.menu a{
+    font-size:14px;font-weight:500;
+    color:var(--ink-dim);
+    transition:color .2s;
+    position:relative;
+  }
+  nav.menu a:hover{color:var(--accent)}
+  .top-phone{
+    font-family:'Oswald',sans-serif;
+    font-size:18px;font-weight:600;
+    letter-spacing:.02em;
+    padding:10px 18px;
+    border:1.5px solid var(--accent);
+    color:var(--accent);
+    transition:all .2s;
+  }
+  .top-phone:hover{background:var(--accent);color:var(--bg)}
+
+  @media(max-width:900px){
+    nav.menu{display:none}
+    .top-phone{font-size:14px;padding:8px 12px}
+    .logo{font-size:17px}
+    .logo-mark{width:36px;height:36px;font-size:19px}
+  }
+
+  /* ====== HERO ====== */
+  .hero{
+    position:relative;
+    padding:80px 0 90px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::after{
+    content:"PRIME";
+    position:absolute;
+    right:-30px;bottom:-80px;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(220px,32vw,460px);
+    line-height:.85;
+    color:var(--accent);
+    opacity:.05;
+    pointer-events:none;
+    letter-spacing:-.04em;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  @media(max-width:900px){
+    .hero{padding:50px 0 60px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+  }
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.2em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:24px;
+    font-weight:500;
+  }
+  .eyebrow::before{
+    content:"";width:30px;height:1.5px;background:var(--accent);
+  }
+  h1.hero-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(44px,6.5vw,92px);
+    line-height:.95;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+    margin-bottom:28px;
+  }
+  h1.hero-title .accent{
+    color:var(--accent);
+    font-style:italic;
+    font-weight:500;
+    display:inline-block;
+  }
+  h1.hero-title .strike{
+    position:relative;display:inline-block;
+    color:var(--ink-dim);
+    opacity:.6;
+  }
+  h1.hero-title .strike::after{
+    content:"";position:absolute;
+    left:-6%;right:-6%;top:50%;height:14px;
+    background:var(--red);
+    transform:rotate(-4deg);
+    box-shadow:2px 2px 0 rgba(0,0,0,.4);
+    z-index:1;
+    opacity:1;
+  }
+  .hero-lead{
+    font-size:18px;line-height:1.6;
+    color:var(--ink-dim);
+    max-width:540px;
+    margin-bottom:36px;
+  }
+  @media(max-width:600px){
+    .hero-lead{font-size:16px}
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Oswald',sans-serif;
+    font-size:16px;font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:18px 28px;
+    transition:all .2s;
+    cursor:pointer;
+    border:none;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:var(--bg);
+    box-shadow:5px 5px 0 var(--accent-shadow);
+  }
+  .btn-primary:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:7px 7px 0 var(--accent-shadow);
+  }
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    border:1.5px solid var(--line);
+  }
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+  .btn .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* HERO — карточка */
+  .hero-card{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    padding:32px;
+    position:relative;
+    transform:rotate(1.5deg);
+  }
+  .hero-card::before{
+    content:"";
+    position:absolute;
+    top:-1px;left:-1px;right:-1px;height:6px;
+    background:repeating-linear-gradient(45deg,var(--accent) 0 10px,var(--bg) 10px 20px);
+  }
+  .stamp{
+    position:absolute;
+    top:-22px;right:-22px;
+    width:90px;height:90px;
+    border-radius:50%;
+    background:var(--accent);
+    color:var(--bg);
+    display:grid;place-items:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;font-size:13px;
+    text-align:center;line-height:1.05;
+    transform:rotate(8deg);
+    border:2px dashed rgba(12,15,20,.4);
+    box-shadow:0 4px 18px rgba(78,195,255,.4);
+  }
+  @media(max-width:600px){.stamp{width:74px;height:74px;font-size:11px;top:-16px;right:-10px}}
+
+  .rating-row{
+    display:flex;align-items:flex-end;gap:18px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:20px;margin-bottom:20px;
+  }
+  .rating-num{
+    font-family:'Oswald',sans-serif;
+    font-size:78px;font-weight:700;
+    line-height:.85;color:var(--accent);
+    letter-spacing:-.03em;
+  }
+  .rating-meta small{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--ink-dim);
+    text-transform:uppercase;letter-spacing:.12em;
+    margin-bottom:6px;
+  }
+  .stars{color:var(--accent);font-size:18px;letter-spacing:2px}
+  .rating-meta p{font-size:14px;color:var(--ink-dim);margin-top:4px}
+  .hero-card dl{display:grid;gap:14px}
+  .hero-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;font-size:14px}
+  .hero-card .row dt{
+    color:var(--ink-dim);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .hero-card .row dd{font-weight:600;text-align:right}
+  .live-dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--green);margin-right:6px;
+    box-shadow:0 0 0 3px rgba(127,176,105,.25);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  .live-dot.off{background:var(--red);box-shadow:0 0 0 3px rgba(210,74,58,.25)}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+  /* ====== БЕГУЩАЯ СТРОКА ====== */
+  .ticker{
+    background:var(--accent);
+    color:var(--bg);
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .ticker-track{
+    display:flex;gap:60px;
+    padding:18px 0;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;font-size:18px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    animation:scroll 40s linear infinite;
+    width:max-content;
+  }
+  .ticker-track span{display:inline-flex;align-items:center;gap:60px}
+  .ticker-track span::after{content:"◆";color:var(--accent-shadow);margin-left:60px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ====== СЕКЦИИ ====== */
+  section{padding:90px 0;border-bottom:1px solid var(--line);position:relative}
+  @media(max-width:900px){section{padding:60px 0}}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:30px;margin-bottom:50px;flex-wrap:wrap;
+  }
+  h2.section-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(34px,4.5vw,58px);
+    line-height:1;
+    text-transform:uppercase;
+    letter-spacing:-.005em;
+  }
+  h2.section-title .num{
+    color:var(--accent);
+    font-family:'JetBrains Mono',monospace;
+    font-size:.4em;
+    vertical-align:top;
+    margin-right:14px;
+    letter-spacing:.1em;
+  }
+  .section-head p{
+    color:var(--ink-dim);max-width:380px;font-size:15px;
+  }
+
+  /* ====== УСЛУГИ ====== */
+  .services{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0;
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  @media(max-width:900px){.services{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.services{grid-template-columns:1fr}}
+  .service{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:32px 28px;
+    position:relative;
+    transition:background .25s;
+    cursor:default;
+  }
+  .service:hover{background:var(--bg-2)}
+  .service:hover .svc-num{color:var(--accent)}
+  .service:hover .svc-arrow{transform:translate(4px,-4px);opacity:1}
+  .svc-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.15em;
+    color:var(--ink-dim);
+    margin-bottom:18px;transition:color .25s;
+  }
+  .svc-icon{
+    width:48px;height:48px;
+    margin-bottom:20px;
+    color:var(--accent);
+  }
+  .svc-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;font-size:22px;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    margin-bottom:10px;line-height:1.1;
+  }
+  .svc-desc{
+    font-size:14px;color:var(--ink-dim);
+    line-height:1.5;
+  }
+  .svc-arrow{
+    position:absolute;top:24px;right:24px;
+    color:var(--accent);
+    opacity:0;
+    transition:all .25s;
+  }
+
+  /* ====== МАГАЗИН (масла) ====== */
+  .shop-bg{background:var(--bg-2)}
+  .shop-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media(max-width:900px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.shop-grid{grid-template-columns:1fr}}
+  .product{
+    background:var(--bg);
+    padding:24px 22px;
+    display:flex;flex-direction:column;
+    transition:background .25s;
+  }
+  .product:hover{background:var(--bg-2)}
+  .product-brand{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.15em;
+    color:var(--accent);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .product-name{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;font-size:19px;
+    line-height:1.15;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.005em;
+  }
+  .product-spec{
+    font-size:13px;color:var(--ink-dim);
+    margin-bottom:auto;line-height:1.5;
+    padding-bottom:16px;
+  }
+  .product-foot{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-top:1px dashed var(--line);
+    padding-top:14px;margin-top:14px;
+  }
+  .product-price{
+    font-family:'Oswald',sans-serif;
+    font-size:24px;font-weight:700;
+    color:var(--accent);
+  }
+  .product-price small{font-size:.55em;color:var(--ink-dim);font-weight:500;margin-left:4px}
+  .product-vol{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--ink-dim);
+    letter-spacing:.05em;
+  }
+
+  /* ====== О НАС ====== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;align-items:start;
+  }
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:50px}}
+
+  .about-text p{
+    font-size:17px;line-height:1.7;color:var(--ink);
+    margin-bottom:18px;
+  }
+  .about-text p:first-of-type{
+    font-size:21px;
+    color:var(--ink);
+    line-height:1.5;
+    border-left:3px solid var(--accent);
+    padding-left:24px;
+    margin-bottom:28px;
+    font-weight:500;
+  }
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--bg);
+    padding:30px 24px;
+  }
+  .stat-num{
+    font-family:'Oswald',sans-serif;
+    font-size:54px;font-weight:700;
+    color:var(--accent);
+    line-height:1;letter-spacing:-.02em;
+    margin-bottom:8px;
+  }
+  .stat-num small{font-size:.55em;color:var(--ink-dim);font-weight:500}
+  .stat-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;text-transform:uppercase;
+    letter-spacing:.12em;color:var(--ink-dim);
+  }
+
+  /* ====== МАРКИ ====== */
+  .brands-bg{background:var(--bg-2)}
+  .brands{
+    display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .brand-tag{
+    padding:10px 18px;
+    border:1px solid var(--line);
+    font-family:'Oswald',sans-serif;
+    font-weight:500;font-size:14px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    transition:all .2s;
+  }
+  .brand-tag:hover{border-color:var(--accent);color:var(--accent)}
+  .brand-tag.featured{
+    background:var(--accent);color:var(--bg);
+    border-color:var(--accent);font-weight:700;
+  }
+
+  /* ====== ОТЗЫВЫ ====== */
+  .reviews{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  @media(max-width:900px){.reviews{grid-template-columns:1fr}}
+  .review{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    padding:30px 28px;
+    position:relative;
+    display:flex;flex-direction:column;
+  }
+  .review:nth-child(2){transform:translateY(20px)}
+  @media(max-width:900px){.review:nth-child(2){transform:none}}
+  .review::before{
+    content:"\201C";
+    position:absolute;top:-30px;left:18px;
+    font-family:'Oswald',sans-serif;
+    font-size:120px;line-height:1;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .review-stars{color:var(--accent);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+  .review-text{
+    font-size:15px;line-height:1.6;color:var(--ink);
+    margin-bottom:24px;flex:1;
+  }
+  .review-author{
+    display:flex;align-items:center;gap:12px;
+    border-top:1px solid var(--line);padding-top:18px;
+  }
+  .review-avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--accent);
+    color:var(--bg);
+    display:grid;place-items:center;
+    font-family:'Oswald',sans-serif;font-weight:700;
+    font-size:18px;flex-shrink:0;
+  }
+  .review-author-info b{display:block;font-size:14px;font-weight:600}
+  .review-author-info small{
+    color:var(--ink-dim);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.05em;
+  }
+
+  .yandex-link{
+    display:inline-flex;align-items:center;gap:10px;
+    margin-top:40px;
+    padding:14px 22px;
+    border:1px solid var(--line);
+    font-family:'Oswald',sans-serif;
+    font-size:14px;letter-spacing:.05em;
+    text-transform:uppercase;font-weight:500;
+    transition:all .2s;
+  }
+  .yandex-link:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ====== КОНТАКТ ====== */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:0;
+    border:1px solid var(--line);
+  }
+  @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
+  .contact-info{
+    background:var(--bg-2);
+    padding:48px 40px;
+    border-right:1px solid var(--line);
+  }
+  @media(max-width:900px){
+    .contact-info{border-right:none;border-bottom:1px solid var(--line);padding:36px 28px}
+  }
+  .contact-info h3{
+    font-family:'Oswald',sans-serif;
+    font-size:32px;font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:30px;line-height:1;
+  }
+  .contact-row{
+    margin-bottom:26px;
+    padding-bottom:26px;
+    border-bottom:1px dashed var(--line);
+  }
+  .contact-row:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .contact-row .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.15em;
+    color:var(--ink-dim);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .contact-row .value{
+    font-family:'Oswald',sans-serif;
+    font-size:22px;font-weight:600;
+    line-height:1.2;
+  }
+  .contact-row .value a:hover{color:var(--accent)}
+  .schedule-grid{
+    display:grid;grid-template-columns:repeat(7,1fr);
+    gap:4px;margin-top:10px;
+  }
+  .day{
+    text-align:center;padding:8px 4px;
+    background:var(--bg);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+  }
+  .day b{display:block;font-size:13px;color:var(--accent);margin-bottom:2px;font-family:'Oswald',sans-serif}
+  .day.off{opacity:.4}
+  .day.off b{color:var(--ink-dim)}
+
+  .map-wrap{
+    position:relative;min-height:480px;
+    background:var(--bg-2);
+    overflow:hidden;
+  }
+  @media(max-width:900px){.map-wrap{min-height:380px}}
+  .map-wrap iframe{
+    width:100%;height:100%;border:none;
+    position:absolute;inset:0;
+    filter:grayscale(.3) contrast(1.05);
+  }
+  .map-pin-info{
+    position:absolute;
+    bottom:24px;left:24px;
+    background:var(--bg);
+    border:1px solid var(--accent);
+    padding:14px 18px;
+    z-index:5;
+    box-shadow:4px 4px 0 var(--accent-shadow);
+    max-width:280px;
+  }
+  .map-pin-info b{
+    display:block;
+    font-family:'Oswald',sans-serif;
+    font-size:16px;text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .map-pin-info small{
+    color:var(--ink-dim);font-size:12px;
+  }
+
+  /* ====== CTA ====== */
+  .cta-strip{
+    background:var(--accent);
+    color:var(--bg);
+    padding:70px 0;
+    position:relative;overflow:hidden;
+  }
+  .cta-strip::before{
+    content:"";position:absolute;
+    top:0;left:0;right:0;height:6px;
+    background:repeating-linear-gradient(45deg,var(--bg) 0 14px,var(--accent) 14px 28px);
+  }
+  .cta-strip::after{
+    content:"";position:absolute;
+    bottom:0;left:0;right:0;height:6px;
+    background:repeating-linear-gradient(45deg,var(--bg) 0 14px,var(--accent) 14px 28px);
+  }
+  .cta-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:40px;align-items:center;
+  }
+  @media(max-width:760px){.cta-grid{grid-template-columns:1fr;text-align:center}}
+  .cta-strip h2{
+    font-family:'Oswald',sans-serif;
+    font-size:clamp(32px,4.5vw,56px);
+    font-weight:700;
+    text-transform:uppercase;
+    line-height:.95;letter-spacing:-.01em;
+  }
+  .cta-strip p{
+    margin-top:14px;font-size:17px;font-weight:500;max-width:560px;
+  }
+  .cta-strip .btn-primary{
+    background:var(--bg);color:var(--accent);
+    box-shadow:5px 5px 0 var(--accent-shadow);
+    font-size:18px;padding:22px 32px;
+    justify-self:end;
+  }
+  @media(max-width:760px){.cta-strip .btn-primary{justify-self:center}}
+
+  /* ====== ФУТЕР ====== */
+  footer{
+    background:var(--bg);
+    padding:50px 0 30px;
+    border-top:1px solid var(--line);
+  }
+  .foot{
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:20px;
+    padding-bottom:24px;border-bottom:1px solid var(--line);
+    margin-bottom:24px;
+  }
+  .foot-meta{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--ink-dim);
+    letter-spacing:.08em;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  }
+
+  .reveal{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .sticky-call{
+    display:none;
+    position:fixed;bottom:14px;left:14px;right:14px;
+    z-index:100;
+    background:var(--accent);
+    color:var(--bg);
+    padding:14px 20px;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;font-size:16px;
+    text-transform:uppercase;letter-spacing:.04em;
+    text-align:center;
+    box-shadow:0 6px 24px rgba(78,195,255,.4);
+    border-radius:2px;
+  }
+  @media(max-width:700px){.sticky-call{display:block}}
+</style>
+</head>
+<body>
+
+<!-- ========= ШАПКА ========= -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">PCS</span>
+      <span class="logo-text">
+        Prime&nbsp;Car&nbsp;Service
+        <small>сервис · магазин · Астрахань</small>
+      </span>
+    </a>
+    <nav class="menu">
+      <a href="#services">Услуги</a>
+      <a href="#shop">Масла</a>
+      <a href="#about">О нас</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="tel:+79064563639" class="top-phone">+7 906 456-36-39</a>
+  </div>
+</header>
+
+<!-- ========= HERO ========= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Автотехцентр · Магазин запчастей · Астрахань</div>
+      <h1 class="hero-title">
+        Полный <span class="strike">цикл</span><br>
+        сервиса <span class="accent">под одной крышей</span>
+      </h1>
+      <p class="hero-lead">
+        Двигатель, АКПП, ходовая, кузов, электроника — делаем всё. Работаем со всеми марками: от ВАЗ и китайцев до Mercedes и Audi. Запчасти и масла продаём прямо здесь.
+      </p>
+      <div class="hero-cta">
+        <a href="tel:+79064563639" class="btn btn-primary">
+          Записаться <span class="arrow">→</span>
+        </a>
+        <a href="#services" class="btn btn-secondary">Все услуги</a>
+      </div>
+    </div>
+
+    <div class="hero-card reveal">
+      <div class="stamp">86<br>ОЦЕНОК<br>★★★★★</div>
+      <div class="rating-row">
+        <div class="rating-num">4,2</div>
+        <div class="rating-meta">
+          <small>На Яндекс.Картах</small>
+          <div class="stars">★★★★★</div>
+          <p>39 развёрнутых отзывов</p>
+        </div>
+      </div>
+      <dl>
+        <div class="row"><dt>Качество ремонта</dt><dd>81% положительный</dd></div>
+        <div class="row"><dt>Время ожидания</dt><dd>85% положительный</dd></div>
+        <div class="row"><dt>Персонал</dt><dd>79% положительный</dd></div>
+        <div class="row"><dt>Сейчас</dt><dd><span class="live-dot"></span>Открыто до 19:00</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ========= БЕГУЩАЯ СТРОКА ========= -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Все марки авто</span>
+    <span>Развал-схождение</span>
+    <span>Покраска и кузовной ремонт</span>
+    <span>Магазин масел и запчастей</span>
+    <span>Кешбэк 5% по карте Пэй</span>
+    <span>Детская зона ожидания</span>
+    <span>Все марки авто</span>
+    <span>Развал-схождение</span>
+    <span>Покраска и кузовной ремонт</span>
+    <span>Магазин масел и запчастей</span>
+    <span>Кешбэк 5% по карте Пэй</span>
+    <span>Детская зона ожидания</span>
+  </div>
+</div>
+
+<!-- ========= УСЛУГИ ========= -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">01 /</span>30+ видов работ</h2>
+      <p>От замены масла до удаления катализатора, покраски и предрейсового техосмотра. Всё, что может понадобиться автомобилю — на одной площадке.</p>
+    </div>
+
+    <div class="services reveal">
+
+      <div class="service">
+        <div class="svc-num">→ 01</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 28h32M14 28v-8a4 4 0 014-4h12a4 4 0 014 4v8M16 28v6M32 28v6M10 34h4M34 34h4M22 16v-4M26 16v-4"/></svg>
+        <div class="svc-title">Двигатель и ГБЦ</div>
+        <p class="svc-desc">Капремонт, замена ГРМ, ремонт ГБЦ, форсунок, топливной системы, раскоксовка.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 02</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="14"/><path d="M24 14v20M14 24h20M17 17l14 14M31 17L17 31"/></svg>
+        <div class="svc-title">АКПП, КПП, РКПП</div>
+        <p class="svc-desc">Ремонт автоматических, механических и роботизированных коробок. Замена масла, ремонт сцепления.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 03</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="6"/><path d="M24 8v6M24 34v6M8 24h6M34 24h6M13 13l4 4M31 31l4 4M35 13l-4 4M13 35l4-4"/></svg>
+        <div class="svc-title">Ходовая и амортизаторы</div>
+        <p class="svc-desc">Подвеска, рулевые рейки, карданные валы, амортизаторы. Развал-схождение на стенде.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 04</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="3" fill="currentColor"/><path d="M24 10v8M24 30v8M10 24h8M30 24h8"/></svg>
+        <div class="svc-title">Тормозная система</div>
+        <p class="svc-desc">Колодки, диски, шланги, прокачка, замена жидкости. Полное обслуживание тормозов.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 05</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="14" width="32" height="20" rx="2"/><path d="M14 22v4M20 20v8M26 20v8M32 22v4M8 22h-2M40 22h2"/></svg>
+        <div class="svc-title">Кондиционер</div>
+        <p class="svc-desc">Заправка, ремонт компрессора, проверка на герметичность, замена осушителя.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 06</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 28c4-4 8-4 12 0s8 4 12 0 8-4 12 0M8 22c4-4 8-4 12 0s8 4 12 0 8-4 12 0M14 34h20"/></svg>
+        <div class="svc-title">Выхлоп и катализаторы</div>
+        <p class="svc-desc">Замена катализаторов, удаление, прошивка ЭБУ, ремонт глушителей и резонаторов.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 07</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="14" width="28" height="20" rx="2"/><path d="M14 22h6M14 26h10M28 24l4-4v8z" fill="currentColor"/></svg>
+        <div class="svc-title">Диагностика</div>
+        <p class="svc-desc">Компьютерная диагностика всех систем, поиск ошибок, адаптация блоков, программирование ключей.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 08</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 8l-4 16h8l-4 16 18-22h-10l4-10z" fill="currentColor" stroke="none"/></svg>
+        <div class="svc-title">Электрика и автоэлектроника</div>
+        <p class="svc-desc">Стартеры, генераторы, проводка, парктроники, сигнализации, ремонт блоков управления.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 09</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 36l8-22 6-2 4 6 12-4 4 22z M14 32h20" /></svg>
+        <div class="svc-title">Кузов и покраска</div>
+        <p class="svc-desc">Покраска, ремонт пластиковых бамперов, полировка кузова, тонировка стёкол.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 10</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="14" width="36" height="20" rx="3"/><circle cx="14" cy="34" r="4"/><circle cx="34" cy="34" r="4"/><path d="M10 14V8h28v6"/></svg>
+        <div class="svc-title">Предрейсовый техосмотр</div>
+        <p class="svc-desc">Полный техосмотр перед длительной поездкой. Чек-лист по всем критичным узлам.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 11</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8v32M32 8v32M8 16h32M8 32h32"/></svg>
+        <div class="svc-title">Замена масла и фильтров</div>
+        <p class="svc-desc">Полная замена масла в двигателе, АКПП, мостах. Масло — наше или ваше, на ваш выбор.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+      <div class="service">
+        <div class="svc-num">→ 12</div>
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="16"/><path d="M16 24l6 6 12-12"/></svg>
+        <div class="svc-title">Запчасти под заказ</div>
+        <p class="svc-desc">Подбираем по VIN, заказываем у проверенных поставщиков. На складе — масла, фильтры, расходники.</p>
+        <span class="svc-arrow">↗</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========= МАГАЗИН (масла) ========= -->
+<section id="shop" class="shop-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">02 /</span>Магазин масел</h2>
+      <p>Bardahl, Liqui Moly, NGN, Mannol — оригинал, в наличии. Можно купить или сразу залить у нас в сервисе.</p>
+    </div>
+
+    <div class="shop-grid reveal">
+
+      <div class="product">
+        <div class="product-brand">Liqui Moly</div>
+        <div class="product-name">Top Tec 4200 5W-30</div>
+        <p class="product-spec">НС-синтетическое моторное масло. Для VW, Audi, Mercedes-Benz, BMW, Fiat, Mitsubishi, Peugeot/Citroën.</p>
+        <div class="product-foot">
+          <div class="product-price">7 500<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">Bardahl</div>
+        <div class="product-name">XTEC C3 5W-30</div>
+        <p class="product-spec">Синтетическое среднезольное масло, способствует экономии топлива. Для авто с DPF, по нормам Euro IV–V.</p>
+        <div class="product-foot">
+          <div class="product-price">6 900<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">NGN</div>
+        <div class="product-name">Emerald C3 5W-30</div>
+        <p class="product-spec">Синтетическое всесезонное энергосберегающее масло для бензиновых и дизельных двигателей VAG.</p>
+        <div class="product-foot">
+          <div class="product-price">5 500<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">Bardahl</div>
+        <div class="product-name">XTC SN/CF 5W-40</div>
+        <p class="product-spec">Высокоэффективное синтетическое масло для современных бензиновых и дизельных двигателей с турбонаддувом.</p>
+        <div class="product-foot">
+          <div class="product-price">4 600<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">Liqui Moly</div>
+        <div class="product-name">Optimal 10W-40</div>
+        <p class="product-spec">Полусинтетическое масло с пакетом присадок под российские условия. Хорошо подходит для ВАЗ и ГАЗ.</p>
+        <div class="product-foot">
+          <div class="product-price">4 300<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">NGN</div>
+        <div class="product-name">Gold SN/CF 5W-40</div>
+        <p class="product-spec">Синтетика с уникальным пакетом присадок: высокая защита от износа, увеличенный интервал замены.</p>
+        <div class="product-foot">
+          <div class="product-price">3 800<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">Bardahl</div>
+        <div class="product-name">XTC SN/CF 10W-40</div>
+        <p class="product-spec">Полусинтетика для увеличенных интервалов замены. Защита при холодном пуске круглый год.</p>
+        <div class="product-foot">
+          <div class="product-price">3 600<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">NGN</div>
+        <div class="product-name">ATF Dexron III</div>
+        <p class="product-spec">Полусинтетическая трансмиссионная жидкость для автоматических коробок и гидравлических систем.</p>
+        <div class="product-foot">
+          <div class="product-price">3 500<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-brand">NGN</div>
+        <div class="product-name">Premium SL/CF 10W-40</div>
+        <p class="product-spec">Полусинтетика, обеспечивает надёжную работу двигателя, экономит топливо, низкая испаряемость.</p>
+        <div class="product-foot">
+          <div class="product-price">2 400<small>₽</small></div>
+          <div class="product-vol">4 л</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========= О НАС ========= -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">03 /</span>Почему мы</h2>
+      <p>Не просто автосервис, а техцентр полного цикла: ремонт, диагностика, магазин и место, где удобно ждать с детьми.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Мы делаем буквально всё, что может понадобиться вашему автомобилю — от замены масла до удаления катализатора и покраски бампера. Не нужно мотаться по разным точкам.
+        </p>
+        <p>
+          Работаем со всеми марками: ВАЗ, китайцы, японцы, корейцы, европейские премиум, спецтехника. У механика Павла и команды есть опыт по большинству современных моделей.
+        </p>
+        <p>
+          На месте — магазин с маслами Bardahl, Liqui Moly, NGN и Mannol, а также фильтры и расходники. Что нет — закажем под VIN с доставкой за день-два.
+        </p>
+        <p>
+          Пока машина на подъёмнике, вам не нужно сидеть в коридоре. Тёплая клиентская комната, для детей — зона с диванчиком и телевизором. Принимаем оплату картой и Пэй с кешбэком 5%.
+        </p>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Видов работ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">86</div>
+          <div class="stat-label">Оценок на Я.Картах</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">39</div>
+          <div class="stat-label">Развёрнутых отзывов</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">85<small>%</small></div>
+          <div class="stat-label">Хорошо о сроках</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">25+</div>
+          <div class="stat-label">Марок авто</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5<small>%</small></div>
+          <div class="stat-label">Кешбэк по Пэй</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= МАРКИ ========= -->
+<section class="brands-bg">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">04 /</span>С какими марками работаем</h2>
+      <p>Легковые, импортные и отечественные. Спецтехника по согласованию.</p>
+    </div>
+
+    <div class="brands reveal">
+      <span class="brand-tag featured">Toyota</span>
+      <span class="brand-tag featured">Lexus</span>
+      <span class="brand-tag featured">BMW</span>
+      <span class="brand-tag featured">Mercedes-Benz</span>
+      <span class="brand-tag featured">Audi</span>
+      <span class="brand-tag featured">Volkswagen</span>
+      <span class="brand-tag">ŠKODA</span>
+      <span class="brand-tag">Volvo</span>
+      <span class="brand-tag">Honda</span>
+      <span class="brand-tag">Nissan</span>
+      <span class="brand-tag">Mazda</span>
+      <span class="brand-tag">Mitsubishi</span>
+      <span class="brand-tag">Subaru</span>
+      <span class="brand-tag">Suzuki</span>
+      <span class="brand-tag">SsangYong</span>
+      <span class="brand-tag">Kia</span>
+      <span class="brand-tag">Hyundai</span>
+      <span class="brand-tag">Daewoo</span>
+      <span class="brand-tag">Renault</span>
+      <span class="brand-tag">Peugeot</span>
+      <span class="brand-tag">Citroen</span>
+      <span class="brand-tag">Opel</span>
+      <span class="brand-tag">Ford</span>
+      <span class="brand-tag">Chevrolet</span>
+      <span class="brand-tag">ВАЗ / Lada</span>
+      <span class="brand-tag">Китайские</span>
+      <span class="brand-tag">Спецтехника</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========= ОТЗЫВЫ ========= -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">05 /</span>Что говорят клиенты</h2>
+      <p>Реальные истории с Яндекс.Карт. Кейсы, где нас выручали в нештатных ситуациях.</p>
+    </div>
+
+    <div class="reviews">
+
+      <article class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          Тойота Рав 4. Случайно оказалась рядом с сервисом — масла в двигателе не было совсем, чек горел. Перед этим меняла масло в «гаражном» сервисе, где криво поставили фильтр. Ребята быстро отреагировали, сразу на подъёмник, заказали и заменили. Деток моих посадили в тепло на диванчик к телевизору, механику Павлу — отдельное спасибо. Теперь только сюда.
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">Е</div>
+          <div class="review-author-info">
+            <b>Ефимова</b>
+            <small>06.12.2025 · Toyota RAV4</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          Ехали из Астрахани в Махачкалу — сломался генератор. Срочно искали сервис, где починят прямо сейчас. PrimeCarService откликнулся, отложили свои дела, всё продиагностировали и отремонтировали в этот же день. Огромное спасибо — выручили в чужом городе.
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">С</div>
+          <div class="review-author-info">
+            <b>Светлана</b>
+            <small>19.08.2023 · экстренный ремонт</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          Отличный сервис — мастера и менеджеры молодцы. Быстро диагностируют и ремонтируют, если нужны запчасти — закажут и привезут. Ремонтирую тут Toyota Mark, всё проходит отлично. Если возникают вопросы — решают быстро.
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">Ч</div>
+          <div class="review-author-info">
+            <b>Чикаго Х.</b>
+            <small>13.05.2024 · Знаток города 2 ур.</small>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <a href="https://yandex.ru/maps/org/primecarservice/" target="_blank" rel="noopener" class="yandex-link reveal">
+      Все 39 отзывов на Яндекс.Картах <span>→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ========= КОНТАКТЫ ========= -->
+<section id="contacts">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title"><span class="num">06 /</span>Как нас найти</h2>
+      <p>Медногорская, 121 — рядом с заводом им. Ленина, 170 м от остановки «Улица Пирогова».</p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>PrimeCarService</h3>
+
+        <div class="contact-row">
+          <div class="label">Адрес</div>
+          <div class="value">ул. Медногорская, 121<br>Астрахань</div>
+        </div>
+
+        <div class="contact-row">
+          <div class="label">Телефон администратора</div>
+          <div class="value"><a href="tel:+79064563639">+7 (906) 456-36-39</a></div>
+        </div>
+
+        <div class="contact-row">
+          <div class="label">Часы работы</div>
+          <div class="schedule-grid">
+            <div class="day"><b>Пн</b>9–19</div>
+            <div class="day"><b>Вт</b>9–19</div>
+            <div class="day"><b>Ср</b>9–19</div>
+            <div class="day"><b>Чт</b>9–19</div>
+            <div class="day"><b>Пт</b>9–19</div>
+            <div class="day"><b>Сб</b>9–18</div>
+            <div class="day off"><b>Вс</b>—</div>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="label">Оплата</div>
+          <div class="value" style="font-size:16px;font-family:'Manrope',sans-serif;font-weight:500">
+            Наличные · Карта · Пэй (кешбэк 5%)
+          </div>
+        </div>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?text=Астрахань%2C%20Медногорская%20121&z=16"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allow="fullscreen"></iframe>
+        <div class="map-pin-info">
+          <b>PrimeCarService</b>
+          <small>ул. Медногорская, 121 — рядом с заводом им. Ленина</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========= CTA ========= -->
+<section class="cta-strip">
+  <div class="wrap cta-grid">
+    <div>
+      <h2>Машина не едет?<br>Едет, но как-то странно?</h2>
+      <p>Привозите — компьютерная диагностика покажет всё за полчаса. Скажем честно, что нужно делать сейчас, что подождёт, а что вообще не проблема.</p>
+    </div>
+    <a href="tel:+79064563639" class="btn btn-primary">
+      Позвонить → 456-36-39
+    </a>
+  </div>
+</section>
+
+<!-- ========= ФУТЕР ========= -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="logo">
+        <span class="logo-mark">PCS</span>
+        <span class="logo-text">
+          Prime&nbsp;Car&nbsp;Service
+          <small>Астрахань · ул. Медногорская, 121</small>
+        </span>
+      </div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap">
+        <a href="tel:+79064563639" class="btn btn-secondary" style="padding:12px 18px;font-size:14px">+7 906 456-36-39</a>
+        <a href="https://yandex.ru/maps/org/primecarservice/" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:12px 18px;font-size:14px">Я.Карты</a>
+      </div>
+    </div>
+    <div class="foot-meta">
+      <span>© PrimeCarService · Астрахань</span>
+      <span>ул. Медногорская, 121</span>
+      <span>Сайт-визитка</span>
+    </div>
+  </div>
+</footer>
+
+<a href="tel:+79064563639" class="sticky-call">📞 Позвонить администратору</a>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',(e)=>{
+      const id=a.getAttribute('href');
+      if(id.length>1){
+        const el=document.querySelector(id);
+        if(el){
+          e.preventDefault();
+          const top=el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({top,behavior:'smooth'});
+        }
+      }
+    });
+  });
+
+  // Открыто/закрыто. Пн–Пт 9–19, Сб 9–18, Вс выходной
+  (function(){
+    const dot = document.querySelector('.live-dot');
+    if(!dot) return;
+    const valEl = dot.parentElement;
+    const now = new Date();
+    const day = now.getDay();
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const minutesNow = h*60+m;
+    let open=9*60, close=19*60, isOpen=false;
+    if(day>=1 && day<=5){ isOpen = minutesNow>=open && minutesNow<close; }
+    else if(day===6){ close=18*60; isOpen = minutesNow>=open && minutesNow<close; }
+    if(isOpen){
+      const closeH = day===6 ? '18:00' : '19:00';
+      valEl.innerHTML = '<span class="live-dot"></span>Открыто до '+closeH;
+    } else {
+      valEl.innerHTML = '<span class="live-dot off"></span>' + (day===0 ? 'Воскресенье — выходной' : 'Закрыто до 9:00');
+    }
+  })();
+</script>
+
+</body>
+</html>
